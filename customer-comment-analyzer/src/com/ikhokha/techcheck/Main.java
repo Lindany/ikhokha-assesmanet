@@ -13,10 +13,13 @@ public class Main {
 		File docPath = new File("docs");
 		File[] commentFiles = docPath.listFiles((d, n) -> n.endsWith(".txt"));
 		
-		for (File commentFile : commentFiles) {
-			CommentAnalyzer commentAnalyzer = new CommentAnalyzer(commentFile);
-			Map<String, Integer> fileResults = commentAnalyzer.analyze();
-			addReportResults(fileResults, totalResults);						
+        for(int i = 0; i < commentFiles.length ; i++) {
+			
+			RunnableThread R1 = new RunnableThread(commentFiles[i]);
+		    R1.start();
+		    Map<String, Integer> fileResults = R1.returnResults();
+			addReportResults(fileResults, totalResults);	
+
 		}
 		System.out.println("RESULTS\n=======");
 		totalResults.forEach((k,v) -> System.out.println(k + " : " + v));
@@ -38,3 +41,5 @@ public class Main {
 	}
 
 }
+
+
