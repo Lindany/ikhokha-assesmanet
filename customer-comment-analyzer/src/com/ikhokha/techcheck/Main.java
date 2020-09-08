@@ -14,15 +14,14 @@ public class Main {
 		File[] commentFiles = docPath.listFiles((d, n) -> n.endsWith(".txt"));
 		
 		for (File commentFile : commentFiles) {
-			
+//			System.out.println("commentFiles"+commentFile);
 			CommentAnalyzer commentAnalyzer = new CommentAnalyzer(commentFile);
 			Map<String, Integer> fileResults = commentAnalyzer.analyze();
-			addReportResults(fileResults, totalResults);
-						
+			addReportResults(fileResults, totalResults);						
 		}
-		
 		System.out.println("RESULTS\n=======");
 		totalResults.forEach((k,v) -> System.out.println(k + " : " + v));
+		
 	}
 	
 	/**
@@ -33,7 +32,8 @@ public class Main {
 	private static void addReportResults(Map<String, Integer> source, Map<String, Integer> target) {
 
 		for (Map.Entry<String, Integer> entry : source.entrySet()) {
-			target.put(entry.getKey(), entry.getValue());
+			int newValue = target.get(entry.getKey()) !=null ? target.get(entry.getKey()) : 0 ; 
+			target.put(entry.getKey(), newValue  + entry.getValue());
 		}
 		
 	}
