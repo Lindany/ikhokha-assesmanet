@@ -17,41 +17,19 @@ public class CommentAnalyzer {
 	}
 	
 	public Map<String, Integer> analyze() {
-		
+		MetricsComputation metricsObj = new MetricsComputation();
 		Map<String, Integer> resultsMap = new HashMap<>();
 		
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				
-				if (line.length() < 15) {
-					
-					incOccurrence(resultsMap, "SHORTER_THAN_15");
+				resultsMap = metricsObj.getShorterThan15(line);
+				resultsMap = metricsObj.getMoverMention(line);
+				resultsMap = metricsObj.getShakerMention(line);
+				resultsMap = metricsObj.getQuestionsMention(line);
+				resultsMap = metricsObj.getSpam(line);
 
-				}
-				if (line.contains("Mover")) {
-
-					incOccurrence(resultsMap, "MOVER_MENTIONS");
-				
-				}
-				if (line.contains("Shaker")) {
-
-					incOccurrence(resultsMap, "SHAKER_MENTIONS");
-				
-				}
-				if (line.contains("?")) {
-
-					incOccurrence(resultsMap, "QUESTION_MENTIONS");
-				
-				}
-				
-				//if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(line)
-				if (line.contains("http://") || line.contains("https://") ) {
-
-					incOccurrence(resultsMap, "SPAM_MENTIONS");
-				
-				}
 			}
 			
 		} catch (FileNotFoundException e) {
