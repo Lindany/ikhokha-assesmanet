@@ -19,7 +19,7 @@ public class RunnableThread implements Runnable{
 	         
 	        	CommentAnalyzer commentAnalyzer = new CommentAnalyzer(threadFileName);
 	 			fileResults = commentAnalyzer.analyze();
-	            Thread.sleep(10);
+	            Thread.sleep(500);
 	         
 	      }catch (InterruptedException e) {
 	         System.out.println("Thread " +  threadFileName + " interrupted.");
