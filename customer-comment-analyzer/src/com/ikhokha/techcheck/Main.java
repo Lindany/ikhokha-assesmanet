@@ -14,7 +14,6 @@ public class Main {
 		File[] commentFiles = docPath.listFiles((d, n) -> n.endsWith(".txt"));
 		
 		for (File commentFile : commentFiles) {
-//			System.out.println("commentFiles"+commentFile);
 			CommentAnalyzer commentAnalyzer = new CommentAnalyzer(commentFile);
 			Map<String, Integer> fileResults = commentAnalyzer.analyze();
 			addReportResults(fileResults, totalResults);						
