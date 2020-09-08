@@ -13,9 +13,8 @@ public class Main {
 		File docPath = new File("docs");
 		File[] commentFiles = docPath.listFiles((d, n) -> n.endsWith(".txt"));
 		
-        for(int i = 0; i < commentFiles.length ; i++) {
-			
-			RunnableThread R1 = new RunnableThread(commentFiles[i]);
+        for(File commentFile : commentFiles) {
+			RunnableThread R1 = new RunnableThread(commentFile);
 		    R1.start();
 		    Map<String, Integer> fileResults = R1.returnResults();
 			addReportResults(fileResults, totalResults);	
